@@ -1,0 +1,7 @@
+/* src/components/admin/custom-sweetalert.css */
+.my-swal-popup {
+    width: 400px !important; /* Adjust width as needed */
+    padding: 20px !important; /* Adjust padding as needed */
+    /* height: 00px !important; */
+  }
+  
