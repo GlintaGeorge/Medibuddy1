@@ -8,6 +8,7 @@ import { Server } from "socket.io";
 import socketConfig from "./frameworks/webserver/webSocket/socket";
 import errorHandlingMiddleware from "./frameworks/webserver/middlewares/errorHandlingMiddleware";
 import CustomError from "./utils/customError";
+import path from "path";
 
 const app: Application = express();
 
@@ -20,20 +21,20 @@ const io = new Server(server, {
     },
   });
 
-  // app.use(
-  //   express.static(path.join(__dirname, "../../frontend/dist"))
-  // );
+  app.use(
+    express.static(path.join(__dirname, "../../frontend/dist"))
+  );
 
 socketConfig(io);
 expressConfig(app)
 connectDb();
 routes(app);
 
-// app.get("*", (req: Request, res: Response) => {
-//   res.sendFile(
-//     path.join(__dirname, "../../frontend/dist/index.html")
-//   );
-// });
+app.get("*", (req: Request, res: Response) => {
+  res.sendFile(
+    path.join(__dirname, "../../frontend/dist/index.html")
+  );
+});
 
 serverConfig(server).startServer();
 
